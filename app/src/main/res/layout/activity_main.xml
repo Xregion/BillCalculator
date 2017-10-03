@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kyle.billcalculator.MainActivity">
+
+    <TextView
+        style="@style/LabelStyle"
+        android:text="@string/bill_label"
+        android:id="@+id/label_bill"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:minWidth="120dp" />
+
+    <EditText
+        android:id="@+id/editText_bill"
+        style="@style/InputStyle"
+        android:layout_alignBottom="@+id/label_bill"
+        android:layout_alignTop="@+id/label_bill"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/label_bill"
+        android:hint="@string/bill_input_hint"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        style="@style/LabelStyle"
+        android:text="@string/tip_label"
+        android:id="@+id/label_tip_percentage"
+        android:layout_below="@+id/label_bill"
+        android:minWidth="120dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editText_tip_percentage"
+        style="@style/InputStyle"
+        android:layout_alignBottom="@+id/label_tip_percentage"
+        android:layout_alignLeft="@+id/editText_bill"
+        android:layout_alignRight="@+id/editText_bill"
+        android:layout_alignTop="@+id/label_tip_percentage"
+        android:hint="@string/enter_tip_percentage"
+        android:inputType="number" />
+
+    <View
+        android:layout_width="match_parent"
+        />
+
+    <TextView
+        style="@style/LabelStyle"
+        android:text="@string/tip_amount"
+        android:id="@+id/label_tip_amount"
+        android:layout_below="@+id/label_tip_percentage"
+        android:minWidth="120dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        style="@style/OutputStyle"
+        android:id="@+id/tip_amount_output"
+        android:layout_alignBottom="@+id/label_tip_amount"
+        android:layout_alignLeft="@+id/editText_bill"
+        android:layout_alignRight="@+id/editText_bill"
+        android:layout_alignTop="@+id/label_tip_amount" />
+
+    <TextView
+        style="@style/LabelStyle"
+        android:text="@string/total"
+        android:id="@+id/label_total"
+        android:layout_below="@+id/label_tip_amount"
+        android:minWidth="120dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        style="@style/OutputStyle"
+        android:id="@+id/total"
+        android:layout_alignBottom="@+id/label_total"
+        android:layout_alignLeft="@+id/editText_bill"
+        android:layout_alignRight="@+id/editText_bill"
+        android:layout_alignTop="@+id/label_total" />
+
+    <Button
+        style="@style/ButtonStyle"
+        android:id="@+id/calculate_button"
+        android:text="@string/calculate"
+        android:layout_below="@+id/label_total"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+</android.widget.RelativeLayout>
