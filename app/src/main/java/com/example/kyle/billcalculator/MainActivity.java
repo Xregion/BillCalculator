@@ -3,40 +3,64 @@ package com.example.kyle.billcalculator;
 import android.icu.text.NumberFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText billAmount;
+    EditText tipPercentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView tipAmount = (TextView) findViewById(R.id.tip_amount_output);
-        final TextView totalAmount = (TextView) findViewById(R.id.total);
+        billAmount = (EditText) findViewById(R.id.editText_bill);
+        tipPercentage = (EditText) findViewById(R.id.editText_tip_percentage);
 
-        final EditText billAmount = (EditText) findViewById(R.id.editText_bill);
-        final EditText tipPercentage = (EditText) findViewById(R.id.editText_tip_percentage);
+        TextChangeHandler tch = new TextChangeHandler();
 
-        final Button calculate = (Button) findViewById(R.id.calculate_button);
-        calculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(billAmount.getText().toString().trim()) || TextUtils.isEmpty(tipPercentage.getText().toString().trim())) {
-                    Toast.makeText(MainActivity.this, "Please insert a Bill and Tip Percentage", Toast.LENGTH_LONG).show();
-                } else {
-                    TipCalculator calculator = new TipCalculator(Float.valueOf(billAmount.getText().toString()), Float.valueOf(tipPercentage.getText().toString()));
-                    tipAmount.setText("$" + String.format("%.2f", calculator.CalculateTip()));
-                    totalAmount.setText("$" + String.format("%.2f", calculator.CalculateTotal()));
-                }
-            }
-        });
+        billAmount.addTextChangedListener(tch);
+        tipPercentage.addTextChangedListener(tch);
+    }
+
+    public void Calculate() {
+        TextView tipAmount = (TextView) findViewById(R.id.tip_amount_output);
+        TextView totalAmount = (TextView) findViewById(R.id.total);
+
+        String tipPercent = tipPercentage.getText().toString();
+        String bill = billAmount.getText().toString();
+
+        try {
+            TipCalculator calculator = new TipCalculator(Float.parseFloat(bill), Integer.parseInt(tipPercent));
+            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            tipAmount.setText(nf.format(calculator.CalculateTip()));
+            totalAmount.setText(nf.format(calculator.CalculateTotal()));
+        } catch (NumberFormatException e) {
+            tipAmount.setText("");
+            totalAmount.setText("");
+        }
+    }
+
+
+    private class TextChangeHandler implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            Calculate();
+        }
     }
 }

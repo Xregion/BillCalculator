@@ -6,9 +6,9 @@ package com.example.kyle.billcalculator;
 
 public class TipCalculator {
     float bill;
-    float tip;
+    int tip;
 
-    public TipCalculator (float _bill, float _tip) {
+    public TipCalculator (float _bill, int _tip) {
         SetBill(_bill);
         SetTip(_tip);
     }
@@ -17,7 +17,7 @@ public class TipCalculator {
         return bill;
     }
 
-    public float GetTip() {
+    public int GetTip() {
         return tip;
     }
 
@@ -25,12 +25,12 @@ public class TipCalculator {
         bill = _bill;
     }
 
-    public void SetTip(float _tip) {
+    public void SetTip(int _tip) {
         tip = _tip;
     }
 
     public float CalculateTip() {
-        return bill * (tip / 100);
+        return bill *  ((float) tip / 100);
     }
 
     public float CalculateTotal() {
